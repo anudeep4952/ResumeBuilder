@@ -27,7 +27,7 @@ sap.ui.define([
 			this.lvdata = "";
       	},
 		viewResume:function(ResumeData){
-		//	var data={
+			var data={
   "userId": "1611841819",
   "name": "Gadi Srinivasa Sai Anudeep",
   "linkedin": "linkedin.com/in/anudeepgadi4952",

@@ -8,7 +8,7 @@ xmlns:l="sap.ui.layout"
 			<pages>
 				<Page id="page" title="{i18n>title}">
 					<content>
-						<VBox class="sapUiSmallMargin">
+						<VBox class="sapUiSmallMargin Zinput">
 				<f:Form id="personal"
 					editable="true">
 					<f:title>
@@ -35,7 +35,7 @@ xmlns:l="sap.ui.layout"
 								</f:FormElement>
 								<f:FormElement label="Role">
 									<f:fields>
-										<Input value="{role}" id="role" change="onPersonalChange"/>
+										<Input class="Zinput" value="{role}" id="role" change="onPersonalChange"/>
 									</f:fields>
 								</f:FormElement>
 								<f:FormElement label="address">
