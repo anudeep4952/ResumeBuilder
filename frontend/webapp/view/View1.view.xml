@@ -209,8 +209,8 @@ xmlns:l="sap.ui.layout"
 					<Button icon="sap-icon://add" text="Add" press="onSkillClick"/> 
 				</OverflowToolbar>
 				</Panel>
-				<Button text="click" press="onClick"></Button>
-				<Button text="ToggleEdit" press="onEditClick"></Button>
+				<Button text="SHow" press="onClick"></Button>
+			
 				</VBox>
 			</content>
 			</IconTabFilter>
@@ -220,9 +220,9 @@ xmlns:l="sap.ui.layout"
 				icon="sap-icon://sys-enter-2"
 				iconColor="Positive"
 				design="Horizontal"
-				text="Confirm"
+				text="View"
 				key="Confirm"
-				enabled="false">
+				enabled="true">
 				<content>
 					<VBox class="sapUiSmallMargin">
 							<f:Form id="personalText"
