@@ -191,7 +191,7 @@ sap.ui.define([
 			console.log(ResumeData.experience[0].cName);
 			doc.text(w,obj.h+1,ResumeData.experience[0].cName)
 			doc.setFont('times','normal',400)
-			doc.text(w,obj.h+=10,ResumeData.experience[0].joined +" - "+ResumeData.experience[0].releived)
+			doc.text(w,obj.h+=10,ResumeData.experience[0].joined +" - "+ResumeData.experience[0].relieved)
 			//doc.text(w,obj.h+=10,data.experience[0].role)
 			doc.text(w,obj.h+=10,doc.splitTextToSize(ResumeData.experience[0].description, 180))   
 			
@@ -401,7 +401,7 @@ sap.ui.define([
 			{
 				data.experience.push(ResumeData.experience[key]);
 			}
-			console.log(data);
+			console.log(JSON.stringify(data));
 			this.viewResume(data);
 		},
 		onChange: function(oEvent){
@@ -413,7 +413,7 @@ sap.ui.define([
 			}else{
 				ResumeData[this.key1][this.key2][this.key3] = val;
 			}
-			console.log(ResumeData);
+			//console.log(ResumeData);
 		},
 		onPersonalChange: function(oEvent){
 			var params = oEvent.getParameters();

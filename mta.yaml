@@ -14,6 +14,22 @@ modules:
       - name: uaa_ResumeBuilder
       - name: dest_ResumeBuilder
       - name: UAA-Service
+  - name: ResumeBackend
+    type: nodejs
+    path: ResumeBackend
+    provides:
+      - name: ResumeBackend_api
+        properties:
+          url: '${default-url}'
+    requires:
+      - name: UAA-Service
+      - name: hdi_ResumeHanaDB_2
+      - name: ResumeHanaDB
+  - name: ResumeHanaDB
+    type: hdb
+    path: ResumeHanaDB
+    requires:
+      - name: hdi_ResumeHanaDB_2
 resources:
   - name: uaa_ResumeBuilder
     parameters:
@@ -28,3 +44,38 @@ resources:
     type: org.cloudfoundry.managed-service
   - name: UAA-Service
     type: com.sap.xs.uaa-space
+  - name: hdi_ResumesDb
+    parameters:
+      config:
+        schema: ResumesSchema
+    properties:
+      hdi-container-name: '${service-name}'
+    type: com.sap.xs.hdi-container
+  - name: hdi_ResumeDB
+    parameters:
+      config:
+        schema: ResumeSchema
+    properties:
+      hdi-container-name_2: '${service-name}'
+    type: com.sap.xs.hdi-container
+  - name: hdi_MyDB
+    parameters:
+      config:
+        schema: myDB
+    properties:
+      hdi-container-name_3: '${service-name}'
+    type: com.sap.xs.hdi-container
+  - name: hdi_ResumeHanaDB
+    parameters:
+      config:
+        schema: ResumeHanaDB
+    properties:
+      hdi-container-name_4: '${service-name}'
+    type: com.sap.xs.hdi-container
+  - name: hdi_ResumeHanaDB_2
+    parameters:
+      config:
+        schema: ResumeHanaDB
+    properties:
+      hdi-container-name_5: '${service-name}'
+    type: com.sap.xs.hdi-container
