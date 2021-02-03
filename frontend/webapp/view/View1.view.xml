@@ -6,9 +6,22 @@ xmlns:l="sap.ui.layout"
 	<Shell id="shell">
 		<App id="app">
 			<pages>
-				<Page id="page" title="{i18n>title}">
-					<content>
-						<VBox class="sapUiSmallMargin Zinput">
+				<Page id="page" title="Resume">
+		<content>
+		<IconTabBar
+		id="idIconTabBar"
+		select=".onFilterSelect"
+		class="sapUiResponsiveContentPadding">
+		<items>
+			<IconTabFilter
+				icon="sap-icon://form"
+				iconColor="Critical"
+				design="Horizontal"
+				text="Form"
+				key="Form">
+				<content>
+				<VBox class="sapUiSmallMargin">
+				<Panel expandable="true" headerText="Personal Details" width="auto" class="sapUiResponsiveMargin" id="personalPanel">
 				<f:Form id="personal"
 					editable="true">
 					<f:title>
@@ -30,67 +43,56 @@ xmlns:l="sap.ui.layout"
 							<f:formElements>
 								<f:FormElement label="Name">
 									<f:fields>
-										<Input value="{name}" id="name" change="onPersonalChange"/>
+										<Input value="{name}" id="name" change="onPersonalChange($event,'name')"/>
 									</f:fields>
 								</f:FormElement>
 								<f:FormElement label="Role">
 									<f:fields>
-										<Input class="Zinput" value="{role}" id="role" change="onPersonalChange"/>
+										<Input value="{role}" id="role" change="onPersonalChange($event,'role')"/>
 									</f:fields>
 								</f:FormElement>
 								<f:FormElement label="address">
 									<f:fields>
-										<TextArea value="{address}" id="address" change="onPersonalChange"/>
+										<TextArea value="{address}" id="address" change="onPersonalChange($event,'address')"/>
 									</f:fields>
 								</f:FormElement>
 								<f:FormElement label="Email">
 									<f:fields>
-										<Input value="{email}" type="Url" id="email" change="onPersonalChange"/>
+										<Input value="{email}" type="Url" id="email" change="onPersonalChange($event,'email')"/>
 									</f:fields>
 								</f:FormElement>
 								<f:FormElement label="GitHub">
 									<f:fields>
-										<Input value="{github}" id="github" change="onPersonalChange"/>
+										<Input value="{github}" id="github" change="onPersonalChange($event,'github')"/>
 									</f:fields>
 								</f:FormElement>
 								<f:FormElement label="LinkedIn">
 									<f:fields>
-										<Input value="{lmail}" type="Email" id="lmail" change="onPersonalChange"/>
+										<Input value="{lmail}" type="Url" id="lmail" change="onPersonalChange($event,'lmail')"/>
 									</f:fields>
 								</f:FormElement>
 								<f:FormElement label="Phone Number">
 									<f:fields>
-										<Input value="{phno}" type="Tel" id="phno" change="onPersonalChange"/>
+										<Input value="{phno}" type="Tel" id="phno" change="onPersonalChange($event,'phno')"/>
 									</f:fields>
 								</f:FormElement>
 								<f:FormElement label="Career Objective">
 									<f:fields>
-										<Input value="{cobj}" id="cobj" change="onPersonalChange"/>
+										<TextArea value="{cobj}" id="cobj" change="onPersonalChange($event,'cobj')"/>
 									</f:fields>
 								</f:FormElement>
-								<!--<f:FormElement label="Country">-->
-								<!--	<f:fields>-->
-								<!--		<Select id="country" selectedKey="{Country}">-->
-								<!--			<items>-->
-								<!--				<core:Item text="England" key="England"/>-->
-								<!--				<core:Item text="Germany" key="Germany"/>-->
-								<!--				<core:Item text="USA" key="USA"/>-->
-								<!--			</items>-->
-								<!--		</Select>-->
-								<!--	</f:fields>-->
-								<!--</f:FormElement>-->
 							</f:formElements>
 						</f:FormContainer>
 					</f:formContainers>
 				</f:Form>
+				</Panel>
+				<Panel expandable="true" headerText="Educational Details" width="auto" class="sapUiResponsiveMargin" id="eduPanel">
 				<f:Form id="education"
 					editable="true">
-						<f:toolbar>
+					<f:toolbar>
 						<Toolbar>
 							<Title id="Title2" text="Education"/>
 							<ToolbarSpacer />
-							<Input value="" id="eduType" placeholder="Enter Course Name" width="30%"/>
-							<Button icon="sap-icon://add" text="Add" press="onEduClick"/> 
 						</Toolbar>
 					</f:toolbar>
 					<f:layout>
@@ -107,13 +109,28 @@ xmlns:l="sap.ui.layout"
 					<f:formContainers>
 					</f:formContainers>
 				</f:Form>
+					<OverflowToolbar class="noBorder">
+						<ToolbarSpacer />
+							<Select id="eduType" selectedKey="10th">
+									<items>
+										<core:Item text="10th" key="10th"/>
+										<core:Item text="12th" key="12th"/>
+										<core:Item text="Btech" key="Btech"/>
+										<core:Item text="MSc" key="MSc"/>
+										<core:Item text="MS" key="MS"/>
+										<core:Item text="Mtech" key="Mtech"/>
+									</items>
+								</Select>
+							<Button icon="sap-icon://add" text="Add" press="onEduClick"/> 
+					</OverflowToolbar>
+				</Panel>
+				<Panel expandable="true" headerText="Experience Details" width="auto" class="sapUiResponsiveMargin" id="expPanel">
 				<f:Form id="experience"
 					editable="true">
 					<f:toolbar>
 						<Toolbar>
 							<Title id="expNameId" text="Experience"/>
 							<ToolbarSpacer />
-							<Button icon="sap-icon://add" text="Add" press="onExpClick"/> 
 						</Toolbar>
 					</f:toolbar>
 					<f:layout>
@@ -130,13 +147,17 @@ xmlns:l="sap.ui.layout"
 					<f:formContainers>
 					</f:formContainers>
 				</f:Form>
+				<OverflowToolbar class="noBorder">
+					<ToolbarSpacer />
+					<Button icon="sap-icon://add" text="Add" press="onExpClick"/> 
+				</OverflowToolbar>
+				</Panel>
+				<Panel expandable="true" headerText="Projects Details" width="auto" class="sapUiResponsiveMargin" id="projPanel">
 				<f:Form id="Projects"
 					editable="true">
 					<f:toolbar>
 						<Toolbar>
-							<Title id="projNameId" text="Projects"/>
-							<ToolbarSpacer />
-							<Button icon="sap-icon://add" text="Add" press="onProjClick"/> 
+							<Title id="projNameId" text="Projects"/> 
 						</Toolbar>
 					</f:toolbar>
 					<f:layout>
@@ -153,14 +174,17 @@ xmlns:l="sap.ui.layout"
 					<f:formContainers>
 					</f:formContainers>
 				</f:Form>
+				<OverflowToolbar class="noBorder">
+					<ToolbarSpacer />
+					<Button icon="sap-icon://add" text="Add" press="onProjClick"/>
+				</OverflowToolbar>
+				</Panel>
+				<Panel expandable="true" headerText="Skills Details" width="auto" class="sapUiResponsiveMargin" id="skillPanel">
 				<f:Form id="skill"
 					editable="true">
 					<f:toolbar>
 						<Toolbar>
 							<Title id="skillNameId" text="Skills"/>
-							<ToolbarSpacer />
-							<Input value="" id="skillName" placeholder="Enter Skill Name" width="30%"/>
-							<Button icon="sap-icon://add" text="Add" press="onSkillClick"/> 
 						</Toolbar>
 					</f:toolbar>
 					<f:layout>
@@ -179,11 +203,209 @@ xmlns:l="sap.ui.layout"
 						</f:FormContainer>
 					</f:formContainers>
 				</f:Form>
+				<OverflowToolbar class="noBorder">
+					<ToolbarSpacer />
+					<Input value="" id="skillName" placeholder="Enter Skill Name" width="30%"/>
+					<Button icon="sap-icon://add" text="Add" press="onSkillClick"/> 
+				</OverflowToolbar>
+				</Panel>
 				<Button text="click" press="onClick"></Button>
-			</VBox>
-						<Button text="View" icon="sap-icon://pdf-attachment"  press="viewResume"></Button>
+				<Button text="ToggleEdit" press="onEditClick"></Button>
+				</VBox>
+			</content>
+			</IconTabFilter>
+			<IconTabSeparator icon="sap-icon://open-command-field" />
+			<IconTabFilter
+				id="confirmTab"
+				icon="sap-icon://sys-enter-2"
+				iconColor="Positive"
+				design="Horizontal"
+				text="Confirm"
+				key="Confirm"
+				enabled="false">
+				<content>
+					<VBox class="sapUiSmallMargin">
+							<f:Form id="personalText"
+							editable="true">
+							<f:title>
+								<core:Title text="Personal" />
+							</f:title>
+							<f:layout>
+								<f:ResponsiveGridLayout
+									adjustLabelSpan="false"
+									columnsXL="1"
+									columnsL="1"
+									columnsM="1"
+									emptySpanXL="0"
+									emptySpanL="0"
+									emptySpanM="0"
+									singleContainerFullSize="true" />
+							</f:layout>
+							<f:formContainers>
+								<f:FormContainer title="Personal Information">
+									<f:formElements>
+										<f:FormElement label="Name">
+											<f:fields>
+												<Text id="nameText" text="{name}" />
+											</f:fields>
+										</f:FormElement>
+										<f:FormElement label="Role">
+											<f:fields>
+												<Text text="{role}" id="roleText"/>
+											</f:fields>
+										</f:FormElement>
+										<f:FormElement label="address">
+											<f:fields>
+												<Text text="{address}" id="addressText"/>
+											</f:fields>
+										</f:FormElement>
+										<f:FormElement label="Email">
+											<f:fields>
+												<Text text="{email}" id="emailText"/>
+											</f:fields>
+										</f:FormElement>
+										<f:FormElement label="GitHub">
+											<f:fields>
+												<Text text="{github}" id="githubText"/>
+											</f:fields>
+										</f:FormElement>
+										<f:FormElement label="LinkedIn">
+											<f:fields>
+												<Text text="{lmail}" id="lmailText"/>
+											</f:fields>
+										</f:FormElement>
+										<f:FormElement label="Phone Number">
+											<f:fields>
+												<Text text="{phno}" id="phnoText"/>
+											</f:fields>
+										</f:FormElement>
+										<f:FormElement label="Career Objective">
+											<f:fields>
+												<Text text="{cobj}" id="cobjText"/>
+											</f:fields>
+										</f:FormElement>
+									</f:formElements>
+								</f:FormContainer>
+							</f:formContainers>
+						</f:Form>
+						<OverflowToolbar >
+							<ToolbarSpacer />
+							<Button icon="sap-icon://edit" width="30%" text="Edit" press="onEdit($event,'personalPanel')"/> 
+						</OverflowToolbar>
+						<f:Form id="educationText"
+							editable="true">
+								<f:toolbar>
+								<Toolbar>
+									<Title id="Title2Text" text="Education"/>
+									<ToolbarSpacer />
+								</Toolbar>
+							</f:toolbar>
+							<f:layout>
+								<f:ResponsiveGridLayout
+									adjustLabelSpan="false"
+									columnsXL="1"
+									columnsL="1"
+									columnsM="1"
+									emptySpanXL="0"
+									emptySpanL="0"
+									emptySpanM="0"
+									singleContainerFullSize="true" />
+							</f:layout>
+							<f:formContainers>
+							</f:formContainers>
+						</f:Form>
+						<OverflowToolbar >
+							<ToolbarSpacer />
+							<Button icon="sap-icon://edit" width="30%" text="Edit" press="onEdit($event,'eduPanel')"/> 
+						</OverflowToolbar>
+						<f:Form id="experienceText"
+							editable="true">
+							<f:toolbar>
+								<Toolbar>
+									<Title id="expNameIdText" text="Experience"/>
+									<ToolbarSpacer />
+								</Toolbar>
+							</f:toolbar>
+							<f:layout>
+								<f:ResponsiveGridLayout
+									adjustLabelSpan="false"
+									columnsXL="1"
+									columnsL="1"
+									columnsM="1"
+									emptySpanXL="0"
+									emptySpanL="0"
+									emptySpanM="0"
+									singleContainerFullSize="true" />
+							</f:layout>
+							<f:formContainers>
+							</f:formContainers>
+						</f:Form>
+						<OverflowToolbar >
+							<ToolbarSpacer />
+							<Button icon="sap-icon://edit" width="30%" text="Edit" press="onEdit($event,'expPanel')"/> 
+						</OverflowToolbar>
+						<f:Form id="ProjectsText"
+							editable="true">
+							<f:toolbar>
+								<Toolbar>
+									<Title id="projNameIdText" text="Projects"/>
+									<ToolbarSpacer />
+								</Toolbar>
+							</f:toolbar>
+							<f:layout>
+								<f:ResponsiveGridLayout
+									adjustLabelSpan="false"
+									columnsXL="1"
+									columnsL="1"
+									columnsM="1"
+									emptySpanXL="0"
+									emptySpanL="0"
+									emptySpanM="0"
+									singleContainerFullSize="true" />
+							</f:layout>
+							<f:formContainers>
+							</f:formContainers>
+						</f:Form>
+						<OverflowToolbar >
+							<ToolbarSpacer />
+							<Button icon="sap-icon://edit" width="30%" text="Edit" press="onEdit($event,'projPanel')"/> 
+						</OverflowToolbar>
+						<f:Form id="skillText"
+							editable="true">
+							<f:toolbar>
+								<Toolbar>
+									<Title id="skillNameIdText" text="Skills"/>
+									<ToolbarSpacer />
+								</Toolbar>
+							</f:toolbar>
+							<f:layout>
+								<f:ResponsiveGridLayout
+									adjustLabelSpan="false"
+									columnsXL="1"
+									columnsL="1"
+									columnsM="1"
+									emptySpanXL="0"
+									emptySpanL="0"
+									emptySpanM="0"
+									singleContainerFullSize="true" />
+							</f:layout>
+							<f:formContainers>
+								<f:FormContainer id="skillConText">
+								</f:FormContainer>
+							</f:formContainers>
+						</f:Form>
+						<OverflowToolbar >
+							<ToolbarSpacer />
+							<Button icon="sap-icon://edit" width="30%" text="Edit" press="onEdit($event,'skillPanel')"/> 
+						</OverflowToolbar>
+						<Button text="click" press="onClick"></Button>
+					</VBox>
 					</content>
-				</Page>
+				</IconTabFilter>
+				</items>
+			</IconTabBar>
+		</content>
+	</Page>
 			</pages>
 		</App>
 	</Shell>
