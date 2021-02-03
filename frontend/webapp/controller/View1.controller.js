@@ -1,3 +1,4 @@
+
 sap.ui.define([
 	"sap/ui/core/mvc/Controller",
 	"sap/m/PDFViewer",
@@ -28,7 +29,90 @@ sap.ui.define([
 			this.skill = 0;
       	},
 		viewResume:function(ResumeData){
-		   var doc = new jsPDF('p', 'mm', 'a4')
+			var data={
+  "userId": "1611841819",
+  "name": "Gadi Srinivasa Sai Anudeep",
+  "linkedin": "linkedin.com/in/anudeepgadi4952",
+  "github": "https://github.com/anudeep4952",
+  "email": "anudeep.insvirat@gmail.com",
+  "mobileNumber": "8919410306",
+  "role": "System Engineer",
+  "about": "Self-motivated professional with ability to quickly master new technology to drive process improvements.Strong team player with collaborative abilities .",
+  "education": [
+    {
+      "doj": "2016-06-25",
+      "dop": "2020-09-13",
+      "institution": "R.V.R & J.C College of Engineering",
+      "course":"Btech Information Technology",
+      "score": "8.8"
+    },
+    {
+      "doj": "2013-06-25",
+      "dop": "2015-09-13",
+      "institution": "Sainik School Korukonda",
+      "course":"secondary education",
+      "score": "77"
+    }
+  ],
+  "experience": [
+    {
+      "doj": "2020-07-23",
+      "dop": "present",
+      "role": "System Engineer",
+      "company": "Tata Consultancy Services",
+      "place": "hyderabad",
+      "description": "Working on microservices using Django REST Framework , frontend usingAnguar and containerization using Docker ,also working on feed parsers and MySQL."
+    },
+    {
+      "doj": "2020-01-13",
+      "dop": "2020-03-05",
+      "role": "Intern",
+      "company": "Tata Consultancy Services",
+      "place": "hyderabad",
+      "description": "Worked on Spring Boot, Hibernate ,JPA,Spring Batch , Angular and microservices .Developed RESTAPIs and rich ui screens . Developed batch jobs . Used Swagger fordocumenting APIs."
+    }
+  ],
+  "projects": [
+    {
+      "name": "Image Tamper Detection and Recovery Using Multiple Watermarks",
+      "technology": [
+        "python",
+        "opencv2"
+      ],
+      "description": "The algorithm places watermarks of the image in the original image and can detect tampering when tampered and can also recover the tampered region."
+    },
+    {
+      "name": "Twitter Tweet Analysis Webapp",
+      "technology": [
+        "Django RestFramework",
+        "Angular",
+        "Microservices",
+        "Docker",
+        "AWS EC2"
+      ],
+      "description": "This project gets live tweets from twitter ,analyze them and gives the sentiment. The tweets can be from a particular user or based on a hashtag. The analysis is done using python in the backend, microservices(REST APIs) are used to send the analyzed data to angular. The data contains tweets and their sentiment , overall sentiment , profile picture url and verified profile or not verfiried profile status."
+    }
+  ],
+  "skills": [
+    {
+      "technology": "python",
+      "score": "5"
+    },
+    {
+      "technology": "java8",
+      "score": "4.5"
+    },
+    {
+      "technology": "Django",
+      "score": "3.5"
+    },
+    {
+      "technology": "ui5",
+      "score": "3.5"
+    }
+  ]
+};
+            var doc = new jsPDF('p', 'mm', 'a4')
 	        var h=0,w=10;
 
             var obj = {
@@ -109,7 +193,7 @@ sap.ui.define([
 			console.log(ResumeData.experience[0].cName);
 			doc.text(w,obj.h+1,ResumeData.experience[0].cName)
 			doc.setFont('times','normal',400)
-			doc.text(w,obj.h+=10,ResumeData.experience[0].joined +" - "+ResumeData.experience[0].relieved)
+			doc.text(w,obj.h+=10,ResumeData.experience[0].joined +" - "+ResumeData.experience[0].releived)
 			//doc.text(w,obj.h+=10,data.experience[0].role)
 			doc.text(w,obj.h+=10,doc.splitTextToSize(ResumeData.experience[0].description, 180))   
 			
@@ -140,14 +224,11 @@ sap.ui.define([
 			doc.text(w,obj.h+=10,ResumeData.projects[0].techs.toString())
 			doc.text(w,obj.h+=10,doc.splitTextToSize(ResumeData.projects[0].description, 180))
 			
-			
-			
 			for(var i=1;i<ResumeData.projects.length;i++){
-				console.log(ResumeData.projects,i)
 			    doc.setFont('times','bold',900)
 			doc.setFontSize(16)
 			doc.circle(w-10,obj.h+=15,1,'F')
-			doc.text(w,obj.h+1,ResumeData.projects[i].pName)
+			doc.text(w,obj.h+1,ResumeData.projects[i].pname)
 			doc.setFont('times','normal',400)
 			doc.text(w,obj.h+=10,ResumeData.projects[i].techs.toString())
 			doc.text(w,obj.h+=10,doc.splitTextToSize(ResumeData.projects[i].description, 180))
@@ -324,6 +405,7 @@ sap.ui.define([
 						experience : [] },
 			 key = "";
 			 data.personal=ResumeData.personal;
+			 console.log('hi',data.personal,ResumeData.personal);
 			for(key in ResumeData.education)
 			{
 				data.education.push(ResumeData.education[key]);
@@ -342,7 +424,8 @@ sap.ui.define([
 			{
 				data.experience.push(ResumeData.experience[key]);
 			}
-			console.log(JSON.stringify(data));
+			console.log(data);
+			this.byId("confirmTab").setEnabled(true);
 			this.viewResume(data);
 		},
 		onChange: function(oEvent){
@@ -354,7 +437,8 @@ sap.ui.define([
 			}else{
 				ResumeData[this.key1][this.key2][this.key3] = val;
 			}
-			//console.log(ResumeData);
+			sap.ui.getCore().byId(params.id+"Text").setText(val);
+			console.log(ResumeData);
 		},
 		onPersonalChange: function(oEvent,key){
 			var params = oEvent.getParameters();
