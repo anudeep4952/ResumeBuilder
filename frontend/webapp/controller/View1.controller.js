@@ -223,11 +223,14 @@ sap.ui.define([
 			doc.text(w,obj.h+=10,ResumeData.projects[0].techs.toString())
 			doc.text(w,obj.h+=10,doc.splitTextToSize(ResumeData.projects[0].description, 180))
 			
+			
+			
 			for(var i=1;i<ResumeData.projects.length;i++){
+				console.log(ResumeData.projects,i)
 			    doc.setFont('times','bold',900)
 			doc.setFontSize(16)
 			doc.circle(w-10,obj.h+=15,1,'F')
-			doc.text(w,obj.h+1,ResumeData.projects[i].pname)
+			doc.text(w,obj.h+1,ResumeData.projects[i].pName)
 			doc.setFont('times','normal',400)
 			doc.text(w,obj.h+=10,ResumeData.projects[i].techs.toString())
 			doc.text(w,obj.h+=10,doc.splitTextToSize(ResumeData.projects[i].description, 180))
@@ -404,7 +407,6 @@ sap.ui.define([
 						experience : [] },
 			 key = "";
 			 data.personal=ResumeData.personal;
-			 console.log('hi',data.personal,ResumeData.personal);
 			for(key in ResumeData.education)
 			{
 				data.education.push(ResumeData.education[key]);
