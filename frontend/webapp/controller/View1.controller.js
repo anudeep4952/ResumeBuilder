@@ -1,4 +1,6 @@
 
+
+
 sap.ui.define([
 	"sap/ui/core/mvc/Controller",
 	"sap/m/PDFViewer",
@@ -424,7 +426,7 @@ sap.ui.define([
 			{
 				data.experience.push(ResumeData.experience[key]);
 			}
-			
+			console.log(data);
 			this.byId("confirmTab").setEnabled(true);
 			this.viewResume(data);
 		},
@@ -531,7 +533,7 @@ sap.ui.define([
 				that.byId(item).setExpanded(false);
 			}
 			this.byId(id).setExpanded(true);
-			//this.byId("confirmTab").setEnabled(false);
+			this.byId("confirmTab").setEnabled(false);
 		}
 		
 	});

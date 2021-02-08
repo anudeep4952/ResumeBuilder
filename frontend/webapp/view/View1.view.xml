@@ -209,7 +209,7 @@ xmlns:l="sap.ui.layout"
 					<Button icon="sap-icon://add" text="Add" press="onSkillClick"/> 
 				</OverflowToolbar>
 				</Panel>
-				<Button text="SHow" press="onClick"></Button>
+				<Button text="Show" press="onClick"></Button>
 			
 				</VBox>
 			</content>

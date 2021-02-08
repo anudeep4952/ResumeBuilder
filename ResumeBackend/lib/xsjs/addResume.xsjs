@@ -104,6 +104,6 @@ for(var i=0;i<content.skills.length;i++){
 
 
 
-$.response.setBody(rs);
+$.response.setBody({timestamp:`${timestamp}`});
 $.response.status = $.net.http.OK;
 

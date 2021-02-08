@@ -25,6 +25,7 @@ let  rs= conn.executeUpdate(personalQuery);
  rs = conn.executeUpdate(experienceQuery);
  rs = conn.executeUpdate(projectQuery);
  rs = conn.executeUpdate(skillQuery);
+ rs =conn.executeUpdate(userResumeQuery);
 conn.commit();
 
 
@@ -33,3 +34,5 @@ $.response.contentType = "application/json;charset=UTF-8";
 $.response.headers.set("Access-Control-Allow-Origin", "*");
 $.response.setBody(rs);
 $.response.status = $.net.http.OK;
+
+
